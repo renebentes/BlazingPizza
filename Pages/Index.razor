@@ -23,5 +23,6 @@
 
 @if (orderState.ShowingConfigureDialog)
 {
-  <ConfigurePizzaDialog Pizza="orderState.ConfiguringPizza" />
+  <ConfigurePizzaDialog Pizza="orderState.ConfiguringPizza" OnCancel="orderState.CancelConfigurePizzaDialog"
+    OnConfirm="orderState.ConfirmConfigurePizzaDialog" />
 }
