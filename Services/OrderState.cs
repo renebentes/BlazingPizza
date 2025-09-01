@@ -33,4 +33,7 @@ public class OrderState
 
         ShowingConfigureDialog = true;
     }
+
+    public void RemoveConfiguredPizza(Pizza pizza)
+        => Order.Pizzas.Remove(pizza);
 }
