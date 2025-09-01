@@ -12,6 +12,11 @@ trim_trailing_whitespace = true
 [*.xml]
 indent_size = 2
 
+# Razor files
+[*.razor]
+indent_size = 2
+tab_width = 2
+
 # C# files
 [*.cs]
 

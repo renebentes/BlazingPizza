@@ -13,7 +13,13 @@ builder
     .Services
     .AddSqlite<PizzaStoreContext>("Data Source=pizza.db");
 
-builder.Services.AddScoped<PizzaStoreService>();
+builder
+    .Services
+    .AddScoped<PizzaStoreService>();
+
+builder
+    .Services
+    .AddScoped<OrderState>();
 
 var app = builder.Build();
 
