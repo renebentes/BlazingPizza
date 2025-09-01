@@ -8,6 +8,8 @@ public partial class Index(
 {
     private List<PizzaSpecial> _specials = [];
 
+    public Order Order => orderState.Order;
+
     protected override async Task OnInitializedAsync()
         => _specials = await pizzaStoreService.GetPizzaSpecialsAsync();
 }
