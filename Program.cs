@@ -19,6 +19,10 @@ builder
 
 builder
     .Services
+    .AddScoped<OrderService>();
+
+builder
+    .Services
     .AddScoped<OrderState>();
 
 var app = builder.Build();

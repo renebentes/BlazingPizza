@@ -1,3 +1,4 @@
+using BlazingPizza.Model;
 using BlazingPizza.Services;
 
 namespace BlazingPizza.Pages;

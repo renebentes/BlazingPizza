@@ -1,46 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace BlazingPizza.Model;
 
-namespace BlazingPizza
+public class OrderWithStatus
 {
-    public class OrderWithStatus
+    public static readonly TimeSpan DeliveryDuration = TimeSpan.FromMinutes(1); // Unrealistic, but more interesting to watch
+    public static readonly TimeSpan PreparationDuration = TimeSpan.FromSeconds(10);
+
+    public bool IsDelivered => StatusText == "Delivered";
+
+    public Order Order { get; set; } = null!;
+
+    public string StatusText { get; set; } = string.Empty;
+
+    public static OrderWithStatus FromOrder(Order order)
     {
-        public readonly static TimeSpan PreparationDuration = TimeSpan.FromSeconds(10);
-        public readonly static TimeSpan DeliveryDuration = TimeSpan.FromMinutes(1); // Unrealistic, but more interesting to watch
+        // To simulate a real backend process, we fake status updates based on the amount
+        // of time since the order was placed
+        string statusText;
+        var dispatchTime = order.CreatedTime.Add(PreparationDuration);
 
-        public Order Order { get; set; }
+        statusText = DateTime.Now < dispatchTime
+            ? "Preparing"
+            : (DateTime.Now < dispatchTime + DeliveryDuration
+            ? "Out for delivery"
+            : "Delivered");
 
-        public string StatusText { get; set; }
-
-        public bool IsDelivered => StatusText == "Delivered";
-
-        public static OrderWithStatus FromOrder(Order order)
+        return new OrderWithStatus
         {
-            // To simulate a real backend process, we fake status updates based on the amount
-            // of time since the order was placed
-            string statusText;
-            var dispatchTime = order.CreatedTime.Add(PreparationDuration);
-
-            if (DateTime.Now < dispatchTime)
-            {
-                statusText = "Preparing";
-            }
-            else if (DateTime.Now < dispatchTime + DeliveryDuration)
-            {
-                statusText = "Out for delivery";
-            }
-            else
-            {
-                statusText = "Delivered";
-            }
-
-            return new OrderWithStatus
-            {
-                Order = order,
-                StatusText = statusText
-            };
-        }
-
-
+            Order = order,
+            StatusText = statusText
+        };
     }
 }
