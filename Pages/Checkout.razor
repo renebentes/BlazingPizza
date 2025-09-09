@@ -51,16 +51,16 @@
 </div>
 
 @code {
-  Order Order => OrderState.Order;
+  public Order Order => OrderState.Order;
 
-  bool isSubmitting;
+  private bool isSubmitting;
 
-  async Task PlaceOrder()
+  private async Task PlaceOrder()
   {
     isSubmitting = true;
     var newOrderId = await OrderService.PlaceOrderAsync(OrderState.Order);
 
     OrderState.ResetOrder();
-    NavigationManager.NavigateTo("/");
+    NavigationManager.NavigateTo($"myorders/{newOrderId}");
   }
 }
